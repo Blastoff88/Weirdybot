@@ -8,7 +8,7 @@ i = 1
 while i < 2:
     client.chat_postMessage(
         channel="UGQHP14RK",
-        text="Hello <@UGQHP14RK>!"
+        text="<@UGQHP14RK> what is your favorite type of cheese?"
     )
     i = i + 1
     print(i)
