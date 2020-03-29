@@ -12,14 +12,16 @@ slack_events_adapter = SlackEventAdapter(slack_signing_secret, "/slack/events")
 token = os.environ["SLACK_TOKEN"]
 slack_client = slack.WebClient(token=token)
 
+weirdybot = "UU3N964UB"
+
 # Example responder to greetings
 @slack_events_adapter.on("message")
 def handle_message(event_data):
     id = event_data["event_id"]
     message = event_data["event"]
-    print("message: id = " + id + ", text = " + message.get("text"))    
+    print("message: id = " + id + ", user = " + message["user"] + ", text = " + message.get("text"))    
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if message["user"] is "UU3N964UB" or "UU3N964UB" in message.get("text"):
+    if weirdybot in message["user"] or weirdybot in message.get("text"):
         print("it me!")
     elif message.get("subtype") is None and "robot" in message.get('text'):
         channel = message["channel"]
