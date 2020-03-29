@@ -19,7 +19,9 @@ def handle_message(event_data):
     message = event_data["event"]
     print("message: id = " + id + ", text = " + message.get("text"))    
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if message.get("subtype") is None and "hi" in message.get('text'):
+    if message["user"] is "UU3N964UB" or "UU3N964UB" in message.get("text"):
+        print("it me!")
+    elif message.get("subtype") is None and "hi" in message.get('text'):
         channel = message["channel"]
         message = "Hello <@%s>! :tada:" % message["user"]
         slack_client.chat_postMessage(channel=channel, text=message)
