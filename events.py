@@ -21,7 +21,7 @@ weirdybot = "UU3N964UB"
 def handle_message(event_data):
     id = event_data["event_id"]
     message = event_data["event"]
-    print("message: id = " + id + ", user = " + message["user"] + ", text = " + message.get("text"))    
+    print("message: id = " + id + ", text = " + message.get("text"))    
     # If the incoming message contains "hi", then respond with a "Hello" message
     if weirdybot in message["user"] or weirdybot in message.get("text"):
         print("it me!")
