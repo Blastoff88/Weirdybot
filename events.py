@@ -15,6 +15,9 @@ slack_client = slack.WebClient(token=token)
 # Example responder to greetings
 @slack_events_adapter.on("message")
 def handle_message(event_data):
+    id = event_data["event_id"]
+    time = event_data["event_time"]
+    print("id = " + id + ", time = " + str(time))
     message = event_data["event"]
     # If the incoming message contains "hi", then respond with a "Hello" message
     if message.get("subtype") is None and "hi" in message.get('text'):
