@@ -25,7 +25,7 @@ def handle_message(event_data):
         print("it me!")
     elif message.get("subtype") is None and "robot" in message.get('text'):
         channel = message["channel"]
-        message = "Is someone talking about me?"
+        message = "Is someone talking about me? :robot_face:"
         slack_client.chat_postMessage(channel=channel, text=message)
 
 # Example responder to greetings
