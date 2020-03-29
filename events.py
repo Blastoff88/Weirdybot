@@ -45,13 +45,13 @@ def handle_mention(event_data):
         colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan",]
         message = "<@%s> %s" % (user, random.choice(colors))
         slack_client.chat_postMessage(channel=channel, text=message)
-    elif "lego part" in text.lower:
-        matches = re.findall("lego part [0-9]+", text.lower)
+    elif "lego part" in text.lower():
+        matches = re.findall("lego part [0-9]+", text.lower())
         if not matches:
             message = "<@%s> You did not post a part number. Please try again." % user
             slack_client.chat_postMessage(channel=channel, text=message)
         else:
-            part = re.sub("lego part ", "", matches[0].lower)
+            part = re.sub("lego part ", "", matches[0].lower())
             message = "<@%s> Here is a link to that part: https://brickset.com/parts/%s/" % (user, part)
             slack_client.chat_postMessage(channel=channel, text=message)
     elif "hi" in message.get("text"):
