@@ -21,9 +21,9 @@ def handle_message(event_data):
     # If the incoming message contains "hi", then respond with a "Hello" message
     if message["user"] is "UU3N964UB" or "UU3N964UB" in message.get("text"):
         print("it me!")
-    elif message.get("subtype") is None and "hi" in message.get('text'):
+    elif message.get("subtype") is None and "robot" in message.get('text'):
         channel = message["channel"]
-        message = "Hello <@%s>! :tada:" % message["user"]
+        message = "Is someone talking about me? :robot_face:"
         slack_client.chat_postMessage(channel=channel, text=message)
 
 # Example responder to greetings
