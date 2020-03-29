@@ -38,7 +38,7 @@ def handle_mention(event_data):
         slack_client.chat_postMessage(channel=channel, text=message)
     else:
         channel = message["channel"]
-        message = "<@%s>, I'm not smart enough to understand that yet."
+        message = "I'm not smart enough to understand that yet."
         slack_client.chat_postMessage(channel=channel, text=message)
 
 # Example reaction emoji echo
