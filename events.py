@@ -26,13 +26,13 @@ def handle_message(event_data):
 
 # Example responder to greetings
 @slack_events_adapter.on("app_mention")
-def handle_message(event_data):
+def handle_mention(event_data):
     id = event_data["event_id"]
     time = event_data["event_time"]
     message = event_data["event"]
     print("app_mention: id = " + id + ", text = " + message.get("text"))
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if "hi" in text:
+    if "hi" in message.get("text"):
         channel = message["channel"]
         message = "Hello <@%s>! :tada:" % message["user"]
         slack_client.chat_postMessage(channel=channel, text=message)
