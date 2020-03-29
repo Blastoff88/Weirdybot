@@ -28,17 +28,17 @@ def handle_message(event_data):
 # Example responder to greetings
 @slack_events_adapter.on("app_mention")
 def handle_message(event_data):
-    text = event_data["text"]
-    print("app_mention: text = " + text)
+    # text = event_data["text"]
+    print("app_mention: text = " + str(event_data))
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if "hi" in text:
-        channel = message["channel"]
-        message = "Hello <@%s>! :tada:" % message["user"]
-        slack_client.chat_postMessage(channel=channel, text=message)
-    else:
-        channel = message["channel"]
-        message = "I'm not smart enough to understand that yet."
-        slack_client.chat_postMessage(channel=channel, text=message)
+    # if "hi" in text:
+    #     channel = message["channel"]
+    #     message = "Hello <@%s>! :tada:" % message["user"]
+    #     slack_client.chat_postMessage(channel=channel, text=message)
+    # else:
+    #     channel = message["channel"]
+    #     message = "I'm not smart enough to understand that yet."
+    #     slack_client.chat_postMessage(channel=channel, text=message)
 
 # Example reaction emoji echo
 @slack_events_adapter.on("reaction_added")
