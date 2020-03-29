@@ -1,2 +1,2 @@
 bot: python bot.py
-web: events.py
+web: python events.py
