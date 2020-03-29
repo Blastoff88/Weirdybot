@@ -2,6 +2,7 @@ from slackeventsapi import SlackEventAdapter
 import slack
 import os
 import random
+import re
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
 
@@ -35,20 +36,29 @@ def handle_mention(event_data):
     id = event_data["event_id"]
     time = event_data["event_time"]
     message = event_data["event"]
-    print("app_mention: id = " + id + ", text = " + message.get("text"))
+    user = message["user"]
+    text = message.get("text")
+    channel = message["channel"]
+    print("app_mention: id = " + id + ", text = " + text)
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if "favorite color?" in message.get('text'):
-        channel = message["channel"]
+    if "favorite color?" in text:
         colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan",]
-        message = "<@%s> %s" % (message["user"], random.choice(colors))
+        message = "<@%s> %s" % (user, random.choice(colors))
         slack_client.chat_postMessage(channel=channel, text=message)
+    elif "lego part" in text.lower
+        matches = re.findall("lego part [0-9]+", text.lower)
+        if not matches:
+            message = "<@%s> You did not post a part number. Please try again." % user
+            slack_client.chat_postMessage(channel=channel, text=message)
+        else:
+            part = re.sub("lego part ", "", matches[0].lower)
+            message = "<@%s> Here is a link to that part: https://brickset.com/parts/%s/" % (user, part)
+            slack_client.chat_postMessage(channel=channel, text=message)
     elif "hi" in message.get("text"):
-        channel = message["channel"]
         message = "Hello <@%s>! :tada:" % message["user"]
         slack_client.chat_postMessage(channel=channel, text=message)
     else:
-        channel = message["channel"]
-        message = "<@%s> I'm not smart enough to understand that yet." % message["user"]
+        message = "<@%s> I'm not smart enough to understand that yet." % user
         slack_client.chat_postMessage(channel=channel, text=message)
 
 # Example reaction emoji echo
