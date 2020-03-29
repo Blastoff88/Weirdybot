@@ -38,9 +38,10 @@ def handle_mention(event_data):
     print("app_mention: id = " + id + ", text = " + message.get("text"))
     # If the incoming message contains "hi", then respond with a "Hello" message
     if "favorite color?" in message.get('text'):
+        channel = message["channel"]
         colors = ["Blue",'Red',"Green","Brown","Fuchsia"]
         message = "<@%s> %s" % (message["user"], random.choice(colors))
-        slack_client.chat_postMessage(channel=message["channel"], text=message)
+        slack_client.chat_postMessage(channel=channel, text=message)
     elif "hi" in message.get("text"):
         channel = message["channel"]
         message = "Hello <@%s>! :tada:" % message["user"]
