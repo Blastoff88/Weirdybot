@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "weirdybot"
+version = "0.1.0"
+description = ""
+authors = ["Greyden Kutner"]
+
+[tool.poetry.dependencies]
+python = ">=3.6.0"
+slackclient = "^2.5.0"
+slackeventsapi = "^2.1.0"
+python-dotenv = "^0.12.0"
+
