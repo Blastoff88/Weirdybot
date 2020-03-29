@@ -20,7 +20,7 @@ def handle_message(event_data):
     if message.get("subtype") is None and "hi" in message.get('text'):
         channel = message["channel"]
         message = "Hello <@%s>! :tada:" % message["user"]
-        slack_client.api_call("chat.postMessage", channel=channel, text=message)
+        slack_client.chat_postMessage(channel=channel, text=message)
 
 
 # Example reaction emoji echo
