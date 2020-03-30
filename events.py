@@ -87,13 +87,13 @@ def handle_mention(event_data):
         slack_client.chat_postMessage(channel=channel, text=message)
 
 # Example reaction emoji echo
-@slack_events_adapter.on("reaction_added")
-def reaction_added(event_data):
-    event = event_data["event"]
-    emoji = event["reaction"]
-    channel = event["item"]["channel"]
-    text = ":%s:" % emoji
-    slack_client.api_call("chat.postMessage", channel=channel, text=text)
+# @slack_events_adapter.on("reaction_added")
+# def reaction_added(event_data):
+#     event = event_data["event"]
+#     emoji = event["reaction"]
+#     channel = event["item"]["channel"]
+#     text = ":%s:" % emoji
+#     slack_client.api_call("chat.postMessage", channel=channel, text=text)
 
 # Error events
 @slack_events_adapter.on("error")
