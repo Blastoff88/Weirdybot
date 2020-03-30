@@ -22,9 +22,10 @@ def handle_message(event_data):
     id = event_data["event_id"]
     message = event_data["event"]
     text = message.get("text") if "text" in message else ""
+    user = message["user"] if "user" in message else ""
     print("message: id = " + id + ", text = " +text)    
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if weirdybot in message["user"] or weirdybot in text:
+    if weirdybot in user or weirdybot in text:
         print("it me!")
     elif message.get("subtype") is None and "robot" in text:
         channel = message["channel"]
