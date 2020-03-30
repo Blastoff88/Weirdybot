@@ -21,6 +21,7 @@ weirdybot = "UU3N964UB"
 def handle_message(event_data):
     id = event_data["event_id"]
     message = event_data["event"]
+    channel = message["channel"]
     text = message.get("text") if "text" in message else ""
     user = message["user"] if "user" in message else ""
     print("message: id = " + id + ", text = " +text)    
@@ -28,8 +29,12 @@ def handle_message(event_data):
     if weirdybot in user or weirdybot in text:
         print("it me!")
     elif message.get("subtype") is None and "robot" in text:
-        channel = message["channel"]
         message = "Is someone talking about me? :robot_face:"
+        slack_client.chat_postMessage(channel=channel, text=message)
+    elif re.findall("[a-z]{7}", text.lower()):
+        matches = re.findall("[a-z]{7}[a-x]*", text.lower())
+        word = matches[0]
+        message = "<@%s> The word %s is one very weird word. Here's a link to its definition: https://www.dictionary.com/browse/%s" % (user, word, word)
         slack_client.chat_postMessage(channel=channel, text=message)
 
 # Example responder to greetings
