@@ -41,7 +41,7 @@ def handle_message(event_data):
     # If the incoming message contains "hi", then respond with a "Hello" message
     if weirdybot in user or weirdybot in text:
         print("it me!")
-    elif message.get("subtype") is None and "robot" in text:
+    elif message.get("subtype") is None and "robot" in text.lower():
         message = "Is someone talking about me? :robot_face:"
         slack_client.chat_postMessage(channel=channel, text=message)
     elif re.findall("[a-z]{8}", text.lower()):
@@ -61,7 +61,7 @@ def handle_mention(event_data):
         return
     print("app_mention: id = " + id + ", text = " + text)
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if "favorite color?" in text:
+    if "favorite color?" in text.lower():
         colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan",]
         message = "<@%s> %s" % (user, random.choice(colors))
         slack_client.chat_postMessage(channel=channel, text=message)
@@ -74,12 +74,12 @@ def handle_mention(event_data):
             part = re.sub("lego part ", "", matches[0].lower())
             message = "<@%s> Here is a link to that part: https://brickset.com/parts/%s/" % (user, part)
             slack_client.chat_postMessage(channel=channel, text=message)
-    elif "who are you" in text:
+    elif "who are you" in text.lower():
         message = "<@%s> I am a robot. This is my source code: https://github.com/jkutner/Weirdybot" % user
         slack_client.chat_postMessage(channel=channel, text=message)
     elif re.findall("[a-z]{8}", text.lower()):
         define_word(text, user, channel)
-    elif "hi" in text:
+    elif "hi" in text.lower():
         message = "Hello <@%s>! :tada:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
     else:
