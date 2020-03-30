@@ -21,7 +21,7 @@ channels = [
 ]
 
 def define_word(text, user, channel):
-    matches = re.findall("[a-z]{7}[a-x]*", text.lower())
+    matches = re.findall("[a-z]{8}[a-x]*", text.lower())
     word = matches[0]
     message = "<@%s> The word %s is one very weird word. Here's a link to its definition: https://www.dictionary.com/browse/%s" % (user, word, word)
     slack_client.chat_postMessage(channel=channel, text=message)
@@ -44,7 +44,7 @@ def handle_message(event_data):
     elif message.get("subtype") is None and "robot" in text:
         message = "Is someone talking about me? :robot_face:"
         slack_client.chat_postMessage(channel=channel, text=message)
-    elif re.findall("[a-z]{7}", text.lower()):
+    elif re.findall("[a-z]{8}", text.lower()):
         define_word(text, user, channel)
 
 # Example responder to greetings
@@ -77,6 +77,8 @@ def handle_mention(event_data):
     elif "who are you" in text:
         message = "<@%s> I am a robot. This is my source code: https://github.com/jkutner/Weirdybot" % user
         slack_client.chat_postMessage(channel=channel, text=message)
+    elif re.findall("[a-z]{8}", text.lower()):
+        define_word(text, user, channel)
     elif "hi" in text:
         message = "Hello <@%s>! :tada:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
