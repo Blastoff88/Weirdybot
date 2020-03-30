@@ -20,7 +20,7 @@ channels = [
     "CGPDL914Y"  #1-random
 ]
 
-def define_word(text, user, channel)
+def define_word(text, user, channel):
     matches = re.findall("[a-z]{7}[a-x]*", text.lower())
     word = matches[0]
     message = "<@%s> The word %s is one very weird word. Here's a link to its definition: https://www.dictionary.com/browse/%s" % (user, word, word)
