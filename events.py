@@ -15,6 +15,10 @@ token = os.environ["SLACK_TOKEN"]
 slack_client = slack.WebClient(token=token)
 
 weirdybot = "UU3N964UB"
+channels = [
+    #"CUF9LSFTP", #bots
+    "CGPDL914Y"  #1-random
+]
 
 # Example responder to greetings
 @slack_events_adapter.on("message")
@@ -22,6 +26,9 @@ def handle_message(event_data):
     id = event_data["event_id"]
     message = event_data["event"]
     channel = message["channel"]
+    if not channel in channels:
+        print("ignoring message in channel: %s" % channel)
+        return
     text = message.get("text") if "text" in message else ""
     user = message["user"] if "user" in message else ""
     print("message: id = " + id + ", text = " +text + ", channel = " +channel)    
@@ -46,6 +53,9 @@ def handle_mention(event_data):
     user = message["user"]
     text = message.get("text")
     channel = message["channel"]
+    if not channel in channels:
+        print("ignoring message in channel: %s" % channel)
+        return
     print("app_mention: id = " + id + ", text = " + text)
     # If the incoming message contains "hi", then respond with a "Hello" message
     if "favorite color?" in text:
