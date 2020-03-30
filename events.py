@@ -71,8 +71,11 @@ def handle_mention(event_data):
             part = re.sub("lego part ", "", matches[0].lower())
             message = "<@%s> Here is a link to that part: https://brickset.com/parts/%s/" % (user, part)
             slack_client.chat_postMessage(channel=channel, text=message)
-    elif "hi" in message.get("text"):
-        message = "Hello <@%s>! :tada:" % message["user"]
+    elif "who are you" in text:
+        message = "<@%s> I am a robot. This is my source code: https://github.com/jkutner/Weirdybot" % user
+        slack_client.chat_postMessage(channel=channel, text=message)
+    elif "hi" in text:
+        message = "Hello <@%s>! :tada:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
     else:
         message = "<@%s> I'm not smart enough to understand that yet." % user
