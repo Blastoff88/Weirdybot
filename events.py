@@ -21,7 +21,7 @@ channels = [
 ]
 
 def define_word(text, user, channel):
-    matches = re.findall("[a-z]{8}[a-x]*", text.lower())
+    matches = re.findall("[a-z]{8}[a-z]*", text.lower())
     word = matches[0]
     message = "<@%s> The word %s is one very weird word. Here's a link to its definition: https://www.dictionary.com/browse/%s" % (user, word, word)
     slack_client.chat_postMessage(channel=channel, text=message)
