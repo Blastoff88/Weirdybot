@@ -44,8 +44,6 @@ def handle_message(event_data):
     elif message.get("subtype") is None and "robot" in text.lower():
         message = "Is someone talking about me? :robot_face:"
         slack_client.chat_postMessage(channel=channel, text=message)
-    elif re.findall("[a-z]{8}", text.lower()):
-        define_word(text, user, channel)
 
 # Example responder to greetings
 @slack_events_adapter.on("app_mention")
@@ -79,8 +77,9 @@ def handle_mention(event_data):
         slack_client.chat_postMessage(channel=channel, text=message)
     elif re.findall("[a-z]{8}", text.lower()):
         define_word(text, user, channel)
+    elif "pronounce gyro" in text.lower():
     elif "hi" in text.lower():
-        message = "Hello <@%s>! :tada:" % user
+        message = "Hello <@%s>! :weirdy:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
     else:
         message = "<@%s> I'm not smart enough to understand that yet." % user
