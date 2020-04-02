@@ -77,7 +77,6 @@ def handle_mention(event_data):
         slack_client.chat_postMessage(channel=channel, text=message)
     elif re.findall("[a-z]{8}", text.lower()):
         define_word(text, user, channel)
-    elif "pronounce gyro" in text.lower():
     elif "hi" in text.lower():
         message = "Hello <@%s>! :weirdy:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
