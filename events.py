@@ -99,7 +99,7 @@ def handle_mention(event_data):
         define_word(word, user, channel)
     elif re.findall("[a-z]+ mean", text.lower()):
         matches = re.findall("[a-z]+ mean", text.lower())
-        word = matches[0].replace("mean ", "")
+        word = matches[0].replace("mean", "")
         define_word(word, user, channel)
     elif re.findall("[a-z]{8}", text.lower()):
         matches = re.findall("[a-z]{8}[a-z]*", text.lower())
