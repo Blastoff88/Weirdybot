@@ -73,9 +73,29 @@ def handle_mention(event_data):
     elif "who are you" in text.lower():
         message = "<@%s> I am a robot. This is my source code: https://github.com/jkutner/Weirdybot" % user
         slack_client.chat_postMessage(channel=channel, text=message)
+    elif re.findall("definition of the word [a-z]+", text.lower()):
+        matches = re.findall("definition of the word [a-z]+", text.lower())
+        word = matches[0].replace("definition of the word ", "")
+        define_word(word, user, channel)
     elif re.findall("definition of [a-z]+", text.lower()):
         matches = re.findall("definition of [a-z]+", text.lower())
         word = matches[0].replace("definition of ", "")
+        define_word(word, user, channel)
+    elif re.findall("define the word [a-z]+", text.lower()):
+        matches = re.findall("define the word [a-z]+", text.lower())
+        word = matches[0].replace("define the word ", "")
+        define_word(word, user, channel)
+    elif re.findall("define [a-z]+", text.lower()):
+        matches = re.findall("define [a-z]+", text.lower())
+        word = matches[0].replace("define ", "")
+        define_word(word, user, channel) 
+    elif re.findall("meaning of the word [a-z]+", text.lower()):
+        matches = re.findall("meaning of the word[a-z]+", text.lower())
+        word = matches[0].replace("meaning of the word ", "")
+        define_word(word, user, channel)
+    elif re.findall("meaning of [a-z]+", text.lower()):
+        matches = re.findall("meaning of [a-z]+", text.lower())
+        word = matches[0].replace("meaning of ", "")
         define_word(word, user, channel)
     elif re.findall("[a-z]{8}", text.lower()):
         matches = re.findall("[a-z]{8}[a-z]*", text.lower())
