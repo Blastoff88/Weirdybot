@@ -75,7 +75,7 @@ def handle_mention(event_data):
         slack_client.chat_postMessage(channel=channel, text=message)
     elif re.findall("definition of [a-z]+", text.lower()):
         matches = re.findall("definition of [a-z]+", text.lower())
-        word = match[0].replace("definition of ", "")
+        word = matches[0].replace("definition of ", "")
         define_word(word, user, channel)
     elif re.findall("[a-z]{8}", text.lower()):
         matches = re.findall("[a-z]{8}[a-z]*", text.lower())
