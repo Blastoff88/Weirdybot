@@ -121,7 +121,6 @@ def handle_mention(event_data):
 def error_handler(err):
     print("ERROR: " + str(err))
 
-
 # Once we have our event listeners configured, we can start the
 # Flask server with the default `/events` endpoint on port 3000
 PORT = os.environ["PORT"]
