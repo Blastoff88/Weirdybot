@@ -17,7 +17,7 @@ slack_client = slack.WebClient(token=token)
 weirdybot = "UU3N964UB"
 channels = [
     "CUF9LSFTP", #bots
-    #bot-testing
+    #bot-testing will go here when number code found
 ]
 
 def define_word(word, user, channel):
@@ -57,8 +57,8 @@ def handle_mention(event_data):
         return
     print("app_mention: id = " + id + ", text = " + text)
     # If the incoming message contains "hi", then respond with a "Hello" message
-    if "favorite color?" in text.lower():
-        colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan",]
+    if "favorite color" in text.lower():
+        colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan", "Orange", "Yellow"]
         message = "<@%s> %s" % (user, random.choice(colors))
         slack_client.chat_postMessage(channel=channel, text=message)
     elif "lego part" in text.lower():
@@ -101,9 +101,9 @@ def handle_mention(event_data):
         matches = re.findall("[a-z]+ mean", text.lower())
         word = matches[0].replace(" mean", "")
         define_word(word, user, channel)
-    elif re.findall("[a-z]{8}", text.lower()):
-        matches = re.findall("[a-z]{8}[a-z]*", text.lower())
-        define_word(matches[0], user, channel)
+    elif "hello" in text.lower():
+        message = "Hi <@%s>! :weirdy:" % user
+        slack_client.chat_postMessage(channel=channel, text=message)
     elif "hi" in text.lower():
         message = "Hello <@%s>! :weirdy:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
