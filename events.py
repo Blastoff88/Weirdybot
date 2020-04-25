@@ -58,7 +58,7 @@ def handle_mention(event_data):
     print("app_mention: id = " + id + ", text = " + text)
     # If the incoming message contains "hi", then respond with a "Hello" message
     if "favorite color" in text.lower():
-        colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan", "Orange", "Yellow"]
+        colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan", "Orange", "Yellow", "What is your favorte color, <@%s>?", "Amber", "I like all colors. In other words, I like white."]
         message = "<@%s> %s" % (user, random.choice(colors))
         slack_client.chat_postMessage(channel=channel, text=message)
     elif "lego part" in text.lower():
