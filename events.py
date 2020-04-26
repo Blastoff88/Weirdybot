@@ -111,7 +111,7 @@ def handle_mention(event_data):
         matches = re.findall("[a-z]+ mean", text.lower())
         word = matches[0].replace(" mean", "")
         define_word(word, user, channel)
-    elif re.findall("who is [a-z\s]+", text.lower())
+    elif re.findall("who is [a-z\s]+", text.lower()):
         matches = re.findall("who is [a-z\s]+", text.lower())
         name = matches[0].replace("who is ", "")
         define_name(name, user, channel)
