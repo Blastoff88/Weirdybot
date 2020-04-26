@@ -17,7 +17,7 @@ slack_client = slack.WebClient(token=token)
 weirdybot = "UU3N964UB"
 channels = [
     "CUF9LSFTP", #bots
-    #bot-testing will go here when number code found
+    "C011EDQKK8E" #bot-testing
 ]
 
 def define_word(word, user, channel):
