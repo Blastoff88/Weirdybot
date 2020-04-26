@@ -33,8 +33,11 @@ def define_name(name, user, channel):
                 message = "<@%s> %s is <@%s>" % (user, real, u["id"]) 
                 slack_client.chat_postMessage(channel=channel, text=message)
                 return
-            elif name.split(" ")[0].lower() == real.split(" ")[0].lower():
-                message = "<@%s> %s is <@%s>" % (user, real, u["id"]) 
+    for u in users["members"]:
+        if "real_name" in u:
+            real = u["real_name"]
+            if name.split(" ")[0].lower() == real.split(" ")[0].lower():
+                message = "<@%s> %s is <@%s>" % (user, name, u["id"]) 
                 slack_client.chat_postMessage(channel=channel, text=message)
                 return
     slack_client.chat_postMessage(channel=channel, text="<@%s> I don't recognize the name %s" % (user, name))
