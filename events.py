@@ -24,6 +24,16 @@ def define_word(word, user, channel):
     message = "<@%s> The word %s is one very weird word. Here's a link to its definition: https://www.dictionary.com/browse/%s" % (user, word, word)
     slack_client.chat_postMessage(channel=channel, text=message)
 
+def define_name(name, user, channel):
+    users = slack_client.users_list()
+    for u in users["members"]:
+        if "real_name" in u:
+            if u["real_name"].lower() == name.lower():
+                message = "<@%s> %s is <@%s>" % (user, u["real_name"], u["id"]) 
+                slack_client.chat_postMessage(channel=channel, text=message)
+                return
+    slack_client.chat_postMessage(channel=channel, text="<@%s> I don't recognize that name" % user)
+
 # Example responder to greetings
 @slack_events_adapter.on("message")
 def handle_message(event_data):
@@ -101,6 +111,10 @@ def handle_mention(event_data):
         matches = re.findall("[a-z]+ mean", text.lower())
         word = matches[0].replace(" mean", "")
         define_word(word, user, channel)
+    elif re.findall("who is [a-z\s]+", text.lower())
+        matches = re.findall("who is [a-z\s]+", text.lower())
+        name = matches[0].replace("who is ", "")
+        define_name(name, user, channel)
     elif "hello" in text.lower():
         message = "Hi <@%s>! :weirdy:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
