@@ -40,7 +40,7 @@ def define_name(name, user, channel):
                 message = "<@%s> %s is <@%s>" % (user, name, u["id"])
                 slack_client.chat_postMessage(channel=channel, text=message)
                 return
-    slack_client.chat_postMessage(channel=channel, text="<@%s> I don't recognize the name %s" % (user, name)).lower():
+    slack_client.chat_postMessage(channel=channel, text="<@%s> I don't recognize the name %s" % (user, name))
 
 # Example responder to greetings
 @slack_events_adapter.on("message")
