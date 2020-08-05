@@ -76,8 +76,7 @@ def handle_mention(event_data):
     print("app_mention: id = " + id + ", text = " + text)
     # If the incoming message contains "hi", then respond with a "Hello" message
     if "favorite color" in text.lower():
-        colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan", "Orange", "Yellow", "Amber", "I like all colors. In other words, I like white."]
-        message = "<@%s> %s" % (user, random.choice(colors))
+        colors = ["Blue",'Red',"Green","Brown","Fuchsia","Bleu cheese","Baby blue","Maroon","Lavender","Gray","Metal","Black. Oh yeah; that's not a color.","Beige","Tan", "Orange", "Yellow", "Amber", "I like all colors. In other words, I like white.", "Blueberry", "Blackberry. Wait; black isn't a color!", "I am drawn in black and white. I don't have any colors on me."]
         slack_client.chat_postMessage(channel=channel, text=message)
     elif "lego part" in text.lower():
         matches = re.findall("lego part [0-9]+", text.lower())
@@ -121,7 +120,7 @@ def handle_mention(event_data):
         define_word(word, user, channel)
     elif re.findall("who is [a-z\s]+", text.lower()):
         matches = re.findall("who is [a-z\s]+", text.lower())
-        name = matches[0].replace("who is ", "")
+        name = matches[0].replace("who is ", "", text.lower())
         define_name(name, user, channel)
     elif "hello" in text.lower():
         message = "Hi <@%s>! :weirdy:" % user
@@ -129,6 +128,8 @@ def handle_mention(event_data):
     elif "hi" in text.lower():
         message = "Hello <@%s>! :weirdy:" % user
         slack_client.chat_postMessage(channel=channel, text=message)
+    elif "got any cheese" in text.lower():
+        message = "Ask Urkelbot.\nHome Computers - https://sites.google.com/view/urkelbothome/home\nSchool Computers - https://sites.google.com/stu.hsv-k12.org/urkelbotschool/?pli=1&authuser=1"
     else:
         message = "<@%s> I'm not smart enough to understand that yet." % user
         slack_client.chat_postMessage(channel=channel, text=message)
