@@ -130,6 +130,7 @@ def handle_mention(event_data):
         slack_client.chat_postMessage(channel=channel, text=message)
     elif "got any cheese" in text.lower():
         message = "Ask Urkelbot.\nHome Computers - https://sites.google.com/view/urkelbothome/home\nSchool Computers - https://sites.google.com/stu.hsv-k12.org/urkelbotschool/?pli=1&authuser=1"
+        slack_client.chat_postMessage(channel=channel, text=message)
     else:
         message = "<@%s> I'm not smart enough to understand that yet." % user
         slack_client.chat_postMessage(channel=channel, text=message)
